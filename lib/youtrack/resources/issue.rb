@@ -1,5 +1,6 @@
 require 'net/http/post/multipart'
 require 'uri'
+require 'rexml/document'
 
 module Youtrack
   class Issue < Base
@@ -8,7 +9,7 @@ module Youtrack
     # ==================
     # USER Methods
     # ==================
-    
+
 
     # Create a New Issue
     # project  string  ID of a project to add new issue to.
@@ -88,7 +89,7 @@ module Youtrack
       req['Cookie'] = service.cookies['Cookie']
       http = Net::HTTP.new(url.host, url.port)
       http.set_debug_output($stderr) if service.debug
-      
+
       if url.scheme == 'https'
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
